@@ -23,14 +23,24 @@ jobs:
       run_cxx: ${{ steps.check.outputs.run_cxx }}
       run_test: ${{ steps.check.outputs.run_test }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          submodules: recursive # 初始化和更新子模块
+          submodules: recursive
+
       - name: Decode API URL
         id: decode_api_url
         run: |
           DECODED_API_URL=$(echo "$ENCODED_API_URL" | base64 --decode)
           echo "API_URL=$DECODED_API_URL" >> $GITHUB_ENV
+
+      # Debug for Api
+      - name: Save log of decoding URL to a file
+        run: echo "After decode, API is $DECODED_API_URL" > log.txt
+
+      - name: Print log from file
+        run: cat log.txt
+
       - name: Check for Rustlings, C++ Experiments and Other Submodules
         id: check
         run: |
