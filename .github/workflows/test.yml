@@ -117,7 +117,7 @@ jobs:
           summary_file=".github/result/rustlings_summary.json"
 
           # 发送 POST 请求
-          curl -X POST "$API_URL" \
+          curl -X POST "${{ env.API_URL }}" \
             -H "accept: application/json;charset=utf-8" \
             -H "Content-Type: application/json" \
             -d "$(cat $summary_file)" \
@@ -220,7 +220,7 @@ jobs:
           summary_file=".github/result/cxx_summary.json"
 
           # 发送 POST 请求
-          curl -X POST "$API_URL" \
+          curl -X POST "${{ env.API_URL }}" \
             -H "accept: application/json;charset=utf-8" \
             -H "Content-Type: application/json" \
             -d "$(cat $summary_file)" \
@@ -238,7 +238,7 @@ jobs:
           submodules: "true"
       - name: Post summary JSON to remote API
         run: |
-          curl -X POST "$API_URL" \
+          curl -X POST "${{ env.API_URL }}" \
            -H "accept: application/json;charset=utf-8" \
            -H "Content-Type: application/json" \
            -d '{
