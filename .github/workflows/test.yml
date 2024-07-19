@@ -34,7 +34,8 @@ jobs:
         run: |
           DECODED_API_URL=$(echo "$ENCODED_API_URL" | base64 --decode)
           echo "Decoded URL: $DECODED_URL"
-          echo "${{ env.API_URL }}=$DECODED_API_URL" >> "$GITHUB_ENV"
+          echo "API_URL=$DECODED_API_URL" >> "$GITHUB_ENV"
+          echo "::set-env name=API_URL::$API_URL"
 
       - name: Check for Rustlings, C++ Experiments and Other Submodules
         id: check
